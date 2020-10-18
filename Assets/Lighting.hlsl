@@ -360,7 +360,7 @@ half3 EnvironmentBRDF(BRDFData brdfData, half3 indirectDiffuse, half3 indirectSp
 // * NDF [Modified] GGX
 // * Modified Kelemen and Szirmay-Kalos for Visibility term
 // * Fresnel approximated with 1/LdotH
-half3 DirectBDRF(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, half3 viewDirectionWS)
+half3 DirectBDRF(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, half3 viewDirectionWS, half luma)
 {
 #ifndef _SPECULARHIGHLIGHTS_OFF
     float3 halfDir = SafeNormalize(float3(lightDirectionWS) + float3(viewDirectionWS));
@@ -390,7 +390,8 @@ half3 DirectBDRF(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, half
     specularTerm = specularTerm - HALF_MIN;
     specularTerm = clamp(specularTerm, 0.0, 100.0); // Prevent FP16 overflow on mobiles
 #endif
-    half specularTermToon = smoothstep(.1,.11,specularTerm)*10;
+    // MODIFIED TOON
+    half specularTermToon = smoothstep(.1,.11,luma)*smoothstep(.1,.11,specularTerm)*10;
     half3 color = specularTermToon * brdfData.specular + brdfData.diffuse;
     return color;
 #else
@@ -602,7 +603,7 @@ half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDi
     half NdotRim = 1-saturate(dot(normalize(viewDirectionWS),normalWS));
     half rimToon = smoothstep(luma,luma+.01,NdotRim);
 
-    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS) * radianceToon) + rimToon*.3;
+    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS, hsl[2]) * radianceToon) + rimToon*.3;
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS)

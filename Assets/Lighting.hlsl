@@ -7,6 +7,43 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
 
+
+// from https://www.chilliant.com/rgb2hsv.html modified
+
+float3 HUEtoRGB(in float H)
+{
+    float R = abs(H * 6 - 3) - 1;
+    float G = 2 - abs(H * 6 - 2);
+    float B = 2 - abs(H * 6 - 4);
+    return saturate(float3(R,G,B));
+}
+float3 HSLtoRGB(in float3 HSL)
+{
+    float3 RGB = HUEtoRGB(HSL.x);
+    float C = (1 - abs(2 * HSL.z - 1)) * HSL.y;
+    return (RGB - 0.5) * C + HSL.z;
+}
+
+float Epsilon = 1e-10;
+float3 RGBtoHCV(in float3 RGB)
+{
+    // Based on work by Sam Hocevar and Emil Persson
+    float4 P = (RGB.g < RGB.b) ? float4(RGB.bg, -1.0, 2.0/3.0) : float4(RGB.gb, 0.0, -1.0/3.0);
+    float4 Q = (RGB.r < P.x) ? float4(P.xyw, RGB.r) : float4(RGB.r, P.yzx);
+    float C = Q.x - min(Q.w, Q.y);
+    float H = abs((Q.w - Q.y) / (6 * C + Epsilon) + Q.z);
+    return float3(H, C, Q.x);
+}
+float3 RGBtoHSL(in float3 RGB)
+{
+    float3 HCV = RGBtoHCV(RGB);
+    float H = HCV.x;
+    float L = HCV.z - HCV.y * 0.5;
+    float S = HCV.y / (1 - abs(L * 2 - 1) + Epsilon);
+    return float3(HCV.x, S, L);
+}
+// ----------------------------------------------------
+
 // If lightmap is not defined than we evaluate GI (ambient + probes) from SH
 // We might do it fully or partially in vertex to save shader ALU
 #if !defined(LIGHTMAP_ON)
@@ -353,8 +390,8 @@ half3 DirectBDRF(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, half
     specularTerm = specularTerm - HALF_MIN;
     specularTerm = clamp(specularTerm, 0.0, 100.0); // Prevent FP16 overflow on mobiles
 #endif
-
-    half3 color = specularTerm * brdfData.specular + brdfData.diffuse;
+    half specularTermToon = smoothstep(.1,.11,specularTerm)*10;
+    half3 color = specularTermToon * brdfData.specular + brdfData.diffuse;
     return color;
 #else
     return brdfData.diffuse;
@@ -546,20 +583,26 @@ half3 LightingSpecular(half3 lightColor, half3 lightDir, half3 normal, half3 vie
     return lightColor * specularReflection;
 }
 
-// modified
+// MODIFIED TO BE TOON
 half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDirectionWS, half lightAttenuation, half3 normalWS, half3 viewDirectionWS)
 {
     half NdotL = saturate(dot(normalWS, lightDirectionWS));
     half3 radiance = lightColor * (lightAttenuation * NdotL);
-    float l = 
-        smoothstep(0.0,0.01,radiance)*0.2+
-        smoothstep(0.2,0.21,radiance)*0.2+
-        smoothstep(0.4,0.41,radiance)*0.2+
-        smoothstep(0.6,0.61,radiance)*0.2+
-        smoothstep(0.8,0.81,radiance)*0.2
-    ;
-    radiance = float3(l,l,l);
-    return DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS) * radiance;
+    
+    half3 hsl = saturate(RGBtoHSL(radiance));
+    half3 hslToon = half3(0,0,0);
+    hslToon[0] = hsl[0];
+    hslToon[1] = hsl[1];
+    hslToon[2] = smoothstep(.1,.11,hsl[2])*.9+.1;
+    half3 radianceToon = HSLtoRGB(hslToon);
+
+
+    // rim light
+    half luma = 1-hsl[2]*.35;
+    half NdotRim = 1-saturate(dot(normalize(viewDirectionWS),normalWS));
+    half rimToon = smoothstep(luma,luma+.01,NdotRim);
+
+    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS) * radianceToon) + rimToon*.3;
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS)

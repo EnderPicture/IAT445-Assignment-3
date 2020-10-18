@@ -124,46 +124,6 @@ Varyings LitPassVertex(Attributes input)
     return output;
 }
 
-// from https://www.chilliant.com/rgb2hsv.html modified
-float3 HUEtoRGB(in float H)
-{
-    float R = abs(H * 6 - 3) - 1;
-    float G = 2 - abs(H * 6 - 2);
-    float B = 2 - abs(H * 6 - 4);
-    return saturate(float3(R,G,B));
-}
-float3 HSLtoRGB(in float3 HSL)
-{
-    float3 RGB = HUEtoRGB(HSL.x);
-    float C = (1 - abs(2 * HSL.z - 1)) * HSL.y;
-    return (RGB - 0.5) * C + HSL.z;
-}
-
-float Epsilon = 1e-10;
-float3 RGBtoHCV(in float3 RGB)
-{
-    // Based on work by Sam Hocevar and Emil Persson
-    float4 P = (RGB.g < RGB.b) ? float4(RGB.bg, -1.0, 2.0/3.0) : float4(RGB.gb, 0.0, -1.0/3.0);
-    float4 Q = (RGB.r < P.x) ? float4(P.xyw, RGB.r) : float4(RGB.r, P.yzx);
-    float C = Q.x - min(Q.w, Q.y);
-    float H = abs((Q.w - Q.y) / (6 * C + Epsilon) + Q.z);
-    return float3(H, C, Q.x);
-}
-float3 RGBtoHSL(in float3 RGB)
-{
-    float3 HCV = RGBtoHCV(RGB);
-    float H = HCV.x;
-    float L = HCV.z - HCV.y * 0.5;
-    float S = HCV.y / (1 - abs(L * 2 - 1) + Epsilon);
-    H = H > 1 ? 1 : H;
-    H = H < 0 ? 0 : H;
-    S = S > 1 ? 1 : S;
-    S = S < 0 ? 0 : S;
-    L = L > 1 ? 1 : L;
-    L = L < 0 ? 0 : L;
-    return float3(HCV.x, S, L);
-}
-
 // Used in Standard (Physically Based) shader
 half4 LitPassFragment(Varyings input) : SV_Target
 {
@@ -177,47 +137,11 @@ half4 LitPassFragment(Varyings input) : SV_Target
     InitializeInputData(input, surfaceData.normalTS, inputData);
 
     half4 color = UniversalFragmentPBR(inputData, surfaceData.albedo, surfaceData.metallic, surfaceData.specular, surfaceData.smoothness, surfaceData.occlusion, surfaceData.emission, surfaceData.alpha);
-
-    float3 hsl = RGBtoHSL(float3(color.r, color.g, color.b));
-
-    float stepsL = 5;
-    float offset = .2;
-
-    // modification for toon
-    float h = hsl[0];
-    float s = hsl[1];
-    // float l = 0;
-    float l = 
-        (smoothstep(0.0, 0.01, hsl[2])*0.2)+
-        (smoothstep(0.2, 0.21, hsl[2])*0.2)+
-        (smoothstep(0.4, 0.41, hsl[2])*0.2)+
-        (smoothstep(0.8, 0.81, hsl[2])*0.2)+
-        (smoothstep(0.99, 1.00, hsl[2])*0.2)
-    ;
-
-    float4 rimDot = 1-dot(normalize(input.viewDirWS), input.normalWS);
-    float rimIntensity = 1-(rimDot * pow(hsl[2], 1))*.8;
-
-    l += smoothstep(rimIntensity,rimIntensity+.01,rimDot[0]);
-
-    l = l > 1 ? 1 : l;
-
-    // float h = hsl[0];
-    // float s = hsl[1];
-    // float l = hsl[2];
-
-    s *= 1-l;
-
-    // float4 rimDot = 1 - input.normalWS[0];
-
-
-    half4 toon = half4(HSLtoRGB(float3(h,s,l)),1);
-
-    toon.rgb = MixFog(toon.rgb, inputData.fogCoord);
-    toon.a = OutputAlpha(toon.a);
+    
+    color.rgb = MixFog(color.rgb, inputData.fogCoord);
+    color.a = OutputAlpha(color.a);
 
     return color;
-    // return toon;
 }
 
 #endif

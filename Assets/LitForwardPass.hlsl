@@ -184,22 +184,39 @@ half4 LitPassFragment(Varyings input) : SV_Target
 
     // modification for toon
     float h = hsl[0];
-    float s = (int(hsl[1]*stepsL)+offset)/(stepsL+offset);
-    float l = (int(hsl[2]*stepsL)+offset)/(stepsL+offset);
+    float s = hsl[1];
+    // float l = 0;
+    float l = 
+        (smoothstep(0.0, 0.01, hsl[2])*0.2)+
+        (smoothstep(0.2, 0.21, hsl[2])*0.2)+
+        (smoothstep(0.4, 0.41, hsl[2])*0.2)+
+        (smoothstep(0.8, 0.81, hsl[2])*0.2)+
+        (smoothstep(0.99, 1.00, hsl[2])*0.2)
+    ;
+
+    float4 rimDot = 1-dot(normalize(input.viewDirWS), input.normalWS);
+    float rimIntensity = 1-(rimDot * pow(hsl[2], 1))*.8;
+
+    l += smoothstep(rimIntensity,rimIntensity+.01,rimDot[0]);
+
+    l = l > 1 ? 1 : l;
 
     // float h = hsl[0];
     // float s = hsl[1];
     // float l = hsl[2];
 
-    s = s*(1-l);
+    s *= 1-l;
+
+    // float4 rimDot = 1 - input.normalWS[0];
+
 
     half4 toon = half4(HSLtoRGB(float3(h,s,l)),1);
 
     toon.rgb = MixFog(toon.rgb, inputData.fogCoord);
     toon.a = OutputAlpha(toon.a);
 
+    // return color;
     return toon;
-    return color;
 }
 
 #endif

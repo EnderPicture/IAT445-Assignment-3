@@ -1,7 +1,8 @@
 #ifndef UNIVERSAL_FORWARD_LIT_PASS_INCLUDED
 #define UNIVERSAL_FORWARD_LIT_PASS_INCLUDED
 
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+// custon lighting shader
+#include "Lighting.hlsl"
 
 struct Attributes
 {
@@ -215,8 +216,8 @@ half4 LitPassFragment(Varyings input) : SV_Target
     toon.rgb = MixFog(toon.rgb, inputData.fogCoord);
     toon.a = OutputAlpha(toon.a);
 
-    // return color;
-    return toon;
+    return color;
+    // return toon;
 }
 
 #endif

@@ -595,9 +595,12 @@ half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDi
 {
     // Light dot product
     half NdotL = saturate(dot(normalWS, lightDirectionWS));
-    half monoRadiance = lightAttenuation * NdotL;
-    half monoRadianceStepped = smoothstep(.1,.1+_BlendSmoothness,monoRadiance)*(1-_AmbientStrength)+_AmbientStrength;
 
+    // calculating how bright the pixel should be for the light
+    half monoRadiance = lightAttenuation * NdotL;
+    // make it not a gradient
+    half monoRadianceStepped = smoothstep(.1,.1+_BlendSmoothness,monoRadiance)*(1-_AmbientStrength)+_AmbientStrength;
+    // add in color
     half3 radianceToon = lightColor * monoRadianceStepped;
 
 

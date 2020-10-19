@@ -144,19 +144,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6920372
+      value: 0.6037116
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.30218786
+      value: -0.4435037
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.64849997
+      value: 0.3188682
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0959936
+      value: 0.58065474
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_RootOrder
@@ -164,15 +164,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -195.015
+      value: -259.716
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -441.638
+      value: -313.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 34.190002
+      value: 112.288
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f29920a30f3572d45bb44079406b6b31, type: 3}
       propertyPath: m_LocalScale.x
@@ -820,7 +820,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+  m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
   m_Intensity: 3.57
   m_Range: 10
   m_SpotAngle: 30

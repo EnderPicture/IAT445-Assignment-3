@@ -65,7 +65,7 @@ Material:
     - _AlphaClip: 0
     - _AmbientStrength: 0.351
     - _Blend: 0
-    - _BlendSmoothness: 0.475
+    - _BlendSmoothness: 0.026
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -78,7 +78,7 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimStrength: 0.136
+    - _RimStrength: 0.396
     - _RimWidth: 0
     - _Smoothness: 0.762
     - _SmoothnessTextureChannel: 0

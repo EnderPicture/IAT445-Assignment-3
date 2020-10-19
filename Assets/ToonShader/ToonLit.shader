@@ -33,7 +33,7 @@ Shader "ToonLit"
         _EmissionMap("Emission", 2D) = "white" {}
 
         _RimWidth("Rim Width", Float) = 0.5
-        _RimStrength("Rim Strength", Float) = 0.15
+        _RimStrength("Rim Strength", Float) = 1
 
         _SpecStrength("Specular Strength", Float) = 10
 

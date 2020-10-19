@@ -593,23 +593,20 @@ half3 LightingSpecular(half3 lightColor, half3 lightDir, half3 normal, half3 vie
 // MODIFIED TO BE TOON
 half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDirectionWS, half lightAttenuation, half3 normalWS, half3 viewDirectionWS)
 {
+    // Light dot product
     half NdotL = saturate(dot(normalWS, lightDirectionWS));
-    half3 radiance = lightColor * (lightAttenuation * NdotL);
-    
-    half3 hsl = saturate(RGBtoHSL(radiance));
-    half3 hslToon = half3(0,0,0);
-    hslToon[0] = hsl[0];
-    hslToon[1] = hsl[1];
-    hslToon[2] = smoothstep(.1,.1+_BlendSmoothness,hsl[2])*(1-_AmbientStrength)+_AmbientStrength;
-    half3 radianceToon = HSLtoRGB(hslToon);
+    half monoRadiance = lightAttenuation * NdotL;
+    half monoRadianceStepped = smoothstep(.1,.1+_BlendSmoothness,monoRadiance)*(1-_AmbientStrength)+_AmbientStrength;
+
+    half3 radianceToon = lightColor * monoRadianceStepped;
 
 
     // rim light
-    half luma = 1-hsl[2]*_RimWidth;
+    half luma = 1-monoRadiance*_RimWidth;
     half NdotRim = 1-saturate(dot(normalize(viewDirectionWS),normalWS));
     half rimToon = smoothstep(luma,luma+(_BlendSmoothness*.5),NdotRim);
 
-    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS, hsl[2]) * radianceToon) + rimToon*_RimStrength;
+    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS, monoRadiance) * radianceToon) * (1+(rimToon*_RimStrength));
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS)

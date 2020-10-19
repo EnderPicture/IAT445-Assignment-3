@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: THings
+  m_Name: Things
   m_Shader: {fileID: 4800000, guid: 2bf294faeb9010a46a783f7544ee2d61, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -63,9 +63,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
-    - _AmbientStrength: 0.4
+    - _AmbientStrength: 0.1
     - _Blend: 0
-    - _BlendSmoothness: 0.589
+    - _BlendSmoothness: 0.01
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -78,18 +78,18 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimStrength: 0.243
-    - _RimWidth: 0.511
-    - _Smoothness: 0.887
+    - _RimStrength: 1
+    - _RimWidth: 0.5
+    - _Smoothness: 0.9
     - _SmoothnessTextureChannel: 0
-    - _SpecStrength: 10.55
+    - _SpecStrength: 10
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

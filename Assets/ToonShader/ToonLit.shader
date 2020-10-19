@@ -39,6 +39,8 @@ Shader "ToonLit"
 
         _AmbientStrength("Ambient Strength", Float) = 0.1
 
+        _BlendSmoothness("Color Blend Smoothness", Float) = 0.01
+
         // Blending state
         [HideInInspector] _Surface("__surface", Float) = 0.0
         [HideInInspector] _Blend("__blend", Float) = 0.0

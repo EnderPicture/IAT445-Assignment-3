@@ -66,6 +66,8 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
             material.SetFloat("_SpecStrength", EditorGUILayout.Slider("Specular Strength",material.GetFloat("_SpecStrength"),0,20));
 
             material.SetFloat("_AmbientStrength", EditorGUILayout.Slider("Ambient Strength",material.GetFloat("_AmbientStrength"),0,1));
+
+            material.SetFloat("_BlendSmoothness", EditorGUILayout.Slider("Shade Smoothness",material.GetFloat("_BlendSmoothness"),0,0.9f));
         }
 
         // material main advanced options

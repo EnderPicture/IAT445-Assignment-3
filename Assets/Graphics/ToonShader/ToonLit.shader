@@ -1,4 +1,4 @@
-Shader "ToonLit"
+Shader "Custom/ToonLit"
 {
     Properties
     {

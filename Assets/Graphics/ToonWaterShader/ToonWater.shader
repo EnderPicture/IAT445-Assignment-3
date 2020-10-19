@@ -1,4 +1,4 @@
-﻿Shader "Roystan/Toon/Water Tut"
+﻿Shader "Custom/Roystan/ToonWater"
 {
     Properties
     {
@@ -117,6 +117,8 @@
 			sampler2D _CameraDepthTexture;
 			sampler2D _CameraNormalsTexture;
 
+			#include "noise.hlsl"
+
             float4 frag (v2f i) : SV_Target
             {
 				// Retrieve the current depth value of the surface behind the
@@ -144,16 +146,18 @@
 				float3 normalDot = saturate(dot(existingNormal, i.viewNormal));
 				float foamDistance = lerp(_FoamMaxDistance, _FoamMinDistance, normalDot);
 				float foamDepthDifference01 = saturate(depthDifference / foamDistance);
-
+				
 				float surfaceNoiseCutoff = foamDepthDifference01 * _SurfaceNoiseCutoff;
 
-				float2 distortSample = (tex2D(_SurfaceDistortion, i.distortUV).xy * 2 - 1) * _SurfaceDistortionAmount;
+				// float2 distortSample = (tex2D(_SurfaceDistortion, i.distortUV).xy * 2 - 1) * _SurfaceDistortionAmount;
+				float2 distortSample = snoise(float2(i.distortUV.x*1,i.distortUV.y*1)) * _SurfaceDistortionAmount;
 
 				// Distort the noise UV based off the RG channels (using xy here) of the distortion texture.
 				// Also offset it by time, scaled by the scroll speed.
 				float2 noiseUV = float2((i.noiseUV.x + _Time.y * _SurfaceNoiseScroll.x) + distortSample.x, 
 				(i.noiseUV.y + _Time.y * _SurfaceNoiseScroll.y) + distortSample.y);
-				float surfaceNoiseSample = tex2D(_SurfaceNoise, noiseUV).r;
+				// float surfaceNoiseSample = tex2D(_SurfaceNoise, noiseUV).r;
+				float surfaceNoiseSample = snoise(float2(noiseUV.x*1,noiseUV.y*1)/2+1);
 
 				// Use smoothstep to ensure we get some anti-aliasing in the transition from foam to surface.
 				// Uncomment the line below to see how it looks without AA.

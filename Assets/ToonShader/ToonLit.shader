@@ -6,11 +6,11 @@ Shader "ToonLit"
         [HideInInspector] _WorkflowMode("WorkflowMode", Float) = 1.0
 
         [MainTexture] _BaseMap("Albedo", 2D) = "white" {}
-        [MainColor] _BaseColor("Color", Color) = (1,1,1,1)
+        [MainColor] _BaseColor("Color", Color) = (0.5,0.5,0.5,1)
 
         _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 
-        _Smoothness("Smoothness", Range(0.0, 1.0)) = 0.5
+        _Smoothness("Smoothness", Range(0.0, 1.0)) = 0.9
         _GlossMapScale("Smoothness Scale", Range(0.0, 1.0)) = 1.0
         _SmoothnessTextureChannel("Smoothness texture channel", Float) = 0
 
@@ -31,6 +31,13 @@ Shader "ToonLit"
 
         _EmissionColor("Color", Color) = (0,0,0)
         _EmissionMap("Emission", 2D) = "white" {}
+
+        _RimWidth("Rim Width", Float) = 0.5
+        _RimStrength("Rim Strength", Float) = 0.15
+
+        _SpecStrength("Specular Strength", Float) = 10
+
+        _AmbientStrength("Ambient Strength", Float) = 0.1
 
         // Blending state
         [HideInInspector] _Surface("__surface", Float) = 0.0
@@ -118,8 +125,10 @@ Shader "ToonLit"
             #pragma vertex LitPassVertex
             #pragma fragment LitPassFragment
 
+
+
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "litforwardpass.hlsl"
+            #include "./LitForwardPass.hlsl"
             ENDHLSL
         }
 
@@ -243,5 +252,5 @@ Shader "ToonLit"
 
     }
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
-    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
+    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.ToonLitShader"
 }

@@ -7,6 +7,11 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
 
+// Toon shader values
+float _RimWidth;
+float _RimStrength;
+float _SpecStrength;
+float _AmbientStrength;
 
 // from https://www.chilliant.com/rgb2hsv.html modified
 
@@ -391,7 +396,7 @@ half3 DirectBDRF(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, half
     specularTerm = clamp(specularTerm, 0.0, 100.0); // Prevent FP16 overflow on mobiles
 #endif
     // MODIFIED TOON
-    half specularTermToon = smoothstep(.1,.11,luma)*smoothstep(.1,.11,specularTerm)*10;
+    half specularTermToon = smoothstep(.1,.11,luma)*smoothstep(.1,.11,specularTerm)*_SpecStrength;
     half3 color = specularTermToon * brdfData.specular + brdfData.diffuse;
     return color;
 #else
@@ -594,16 +599,16 @@ half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDi
     half3 hslToon = half3(0,0,0);
     hslToon[0] = hsl[0];
     hslToon[1] = hsl[1];
-    hslToon[2] = smoothstep(.1,.11,hsl[2])*.9+.1;
+    hslToon[2] = smoothstep(.1,.11,hsl[2])*(1-_AmbientStrength)+_AmbientStrength;
     half3 radianceToon = HSLtoRGB(hslToon);
 
 
     // rim light
-    half luma = 1-hsl[2]*.35;
+    half luma = 1-hsl[2]*_RimWidth;
     half NdotRim = 1-saturate(dot(normalize(viewDirectionWS),normalWS));
     half rimToon = smoothstep(luma,luma+.01,NdotRim);
 
-    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS, hsl[2]) * radianceToon) + rimToon*.3;
+    return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS, hsl[2]) * radianceToon) + rimToon*_RimStrength;
 }
 
 half3 LightingPhysicallyBased(BRDFData brdfData, Light light, half3 normalWS, half3 viewDirectionWS)

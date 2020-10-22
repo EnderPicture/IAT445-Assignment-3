@@ -58,15 +58,18 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
             DrawTileOffset(materialEditor, baseMapProp);
         }
 
+        // Custom Shader editor
         public override void DrawAdditionalFoldouts(Material material)
         {
             material.SetFloat("_RimWidth", EditorGUILayout.Slider("Rim Lighting Width",material.GetFloat("_RimWidth"),0,2));
             material.SetFloat("_RimStrength", EditorGUILayout.Slider("Rim Lighting Strength",material.GetFloat("_RimStrength"),0,5));
 
             material.SetFloat("_SpecStrength", EditorGUILayout.Slider("Specular Strength",material.GetFloat("_SpecStrength"),0,20));
+            material.SetFloat("_SpecSize", EditorGUILayout.Slider("Specular Size",material.GetFloat("_SpecSize"),0,0.9f));
 
             material.SetFloat("_AmbientStrength", EditorGUILayout.Slider("Ambient Strength",material.GetFloat("_AmbientStrength"),0,1));
-            material.SetFloat("_BlendSmoothness", EditorGUILayout.Slider("Shade Smoothness",material.GetFloat("_BlendSmoothness"),0,0.9f));
+            material.SetFloat("_BlendSmoothness", EditorGUILayout.Slider("Shade Smoothness",material.GetFloat("_BlendSmoothness"),0,1));
+            
         }
 
         // material main advanced options

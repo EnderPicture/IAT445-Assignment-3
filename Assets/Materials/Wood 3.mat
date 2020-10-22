@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Wood 3
   m_Shader: {fileID: 4800000, guid: fc4dd905980188747b0edaf41bcb389f, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7a369e34c3cb9b548996c1ec76e0a976, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -80,7 +80,7 @@ Material:
     - _ReceiveShadows: 1
     - _RimStrength: 0.13
     - _RimWidth: 0.607
-    - _Smoothness: 0.9
+    - _Smoothness: 0.339
     - _SmoothnessTextureChannel: 0
     - _SpecStrength: 0.8
     - _SpecularHighlights: 1

@@ -36,10 +36,12 @@ Shader "Custom/ToonLit"
         _RimStrength("Rim Strength", Float) = 1
 
         _SpecStrength("Specular Strength", Float) = 10
+        _SpecSize("Color Blend Smoothness", Float) = 0.99
 
         _AmbientStrength("Ambient Strength", Float) = 0.1
 
         _BlendSmoothness("Color Blend Smoothness", Float) = 0.01
+
 
         // Blending state
         [HideInInspector] _Surface("__surface", Float) = 0.0

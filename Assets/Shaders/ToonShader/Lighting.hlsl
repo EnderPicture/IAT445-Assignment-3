@@ -11,6 +11,7 @@
 float _RimWidth;
 float _RimStrength;
 float _SpecStrength;
+float _SpecSize;
 float _AmbientStrength;
 float _BlendSmoothness;
 
@@ -397,7 +398,7 @@ half3 DirectBDRF(BRDFData brdfData, half3 normalWS, half3 lightDirectionWS, half
     specularTerm = clamp(specularTerm, 0.0, 100.0); // Prevent FP16 overflow on mobiles
 #endif
     // MODIFIED TOON
-    half specularTermToon = smoothstep(.1,.1+_BlendSmoothness,luma)*smoothstep(.1,.1+_BlendSmoothness,specularTerm)*_SpecStrength;
+    half specularTermToon = smoothstep(.1,.1+_BlendSmoothness,luma)*smoothstep(((1-_SpecSize)*10),((1-_SpecSize)*10)+_BlendSmoothness,specularTerm)*_SpecStrength;
     half3 color = specularTermToon * brdfData.specular + brdfData.diffuse;
     return color;
 #else

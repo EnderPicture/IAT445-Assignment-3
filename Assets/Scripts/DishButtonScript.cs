@@ -34,6 +34,7 @@ public class DishButtonScript : MonoBehaviour
         {
             animator.SetBool("goDown", true);
             dishAnimator.SetBool("goDown", true);
+            Destroy(spawnedSound);
             spawnedSound = Instantiate(WarningSound, transform.position, transform.rotation);
         }
     }

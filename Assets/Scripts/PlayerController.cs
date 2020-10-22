@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class PlayerController : MonoBehaviour
 
     public GameObject coconut;
     public Transform firePosition;
+
+    public Text text;
+
+    int numOfCoconut = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         GameObject newCoconut = Instantiate(coconut, firePosition.position, Quaternion.Euler(firePosition.forward));
         newCoconut.GetComponent<Rigidbody>().AddForce(firePosition.forward * coconutFirePower, ForceMode.Impulse);
+        numOfCoconut++;
+        text.text = numOfCoconut+"";
     }
     void CheckForward()
     {

@@ -31290,7 +31290,7 @@ GameObject:
   - component: {fileID: 756446118}
   - component: {fileID: 756446117}
   m_Layer: 0
-  m_Name: Occlusion Area
+  m_Name: OcclusionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

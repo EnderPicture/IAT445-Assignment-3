@@ -25,9 +25,9 @@ public class BoatBlob : MonoBehaviour
         transform.position = position;
         
         Vector3 rotation = new Vector3(
-            initRot.x + Mathf.Sin(Time.realtimeSinceStartup/3),
-            initRot.y + Mathf.Sin(Time.realtimeSinceStartup/4),
-            initRot.z + Mathf.Sin(Time.realtimeSinceStartup/5));
+            initRot.x + Mathf.Sin(Time.realtimeSinceStartup/2.5f),
+            initRot.y + Mathf.Sin(Time.realtimeSinceStartup/3f),
+            initRot.z + Mathf.Sin(Time.realtimeSinceStartup/3.5f));
         transform.rotation = Quaternion.Euler(rotation);
     }
 }

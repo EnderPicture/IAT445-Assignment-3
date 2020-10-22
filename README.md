@@ -5,15 +5,15 @@
 
 [Unity Toon Shader Tutorial at Roystan](https://roystan.net/articles/toon-shader.html)
 
-[](https://forum.unity.com/threads/2d-3d-4d-optimised-perlin-noise-cg-hlsl-library-cginc.218372/)
+[Perlin Noise](https://forum.unity.com/threads/2d-3d-4d-optimised-perlin-noise-cg-hlsl-library-cginc.218372/)
 
-[](https://media.istockphoto.com/vectors/top-view-seamless-vector-sea-sand-vector-id590596406?k=6&m=590596406&s=612x612&w=0&h=7XHVA7WXADb3w0o0cdJgDLzsC0OBBceoMdYgvCbW_Fo=)
+[Sand Texture](https://media.istockphoto.com/vectors/top-view-seamless-vector-sea-sand-vector-id590596406?k=6&m=590596406&s=612x612&w=0&h=7XHVA7WXADb3w0o0cdJgDLzsC0OBBceoMdYgvCbW_Fo=)
 
 [HDRI: Table Mountain 2 | HDRI Haven](https://hdrihaven.com/hdri/?c=skies&h=table_mountain_2)
 
-[](https://images.freecreatives.com/wp-content/uploads/2015/04/natural-paper-background-texture-hd-5a0b.jpg)
+[Paper Texture](https://images.freecreatives.com/wp-content/uploads/2015/04/natural-paper-background-texture-hd-5a0b.jpg)
 
-[](https://giganticubegames.files.wordpress.com/2012/11/crosshairsg.png)
+[Crosshair](https://giganticubegames.files.wordpress.com/2012/11/crosshairsg.png)
 
 [Boat](https://poly.google.com/view/1ZuSXvhkRg_)
 

@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
 
     public Text text;
 
+    public GameObject Music;
+    GameObject musicPlayer;
+    bool musicOn = false;
+
     int numOfCoconut = 0;
 
     // Start is called before the first frame update
@@ -47,11 +51,19 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
-            Debug.Log(hit.transform.name);
             Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddExplosionForce(power, hit.point, range);
+            }
+            if (hit.transform.tag == "Music") {
+                if (musicOn) {
+                    musicOn = false;
+                    Destroy(musicPlayer);
+                } else {
+                    musicOn = true;
+                    musicPlayer = Instantiate(Music, hit.transform.parent.position, Quaternion.Euler(0,0,0));
+                }
             }
         }
 

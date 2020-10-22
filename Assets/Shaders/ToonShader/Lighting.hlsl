@@ -606,9 +606,10 @@ half3 LightingPhysicallyBased(BRDFData brdfData, half3 lightColor, half3 lightDi
 
 
     // rim light
-    half luma = 1-monoRadiance*_RimWidth;
+    // half luma = 1-monoRadiance*_RimWidth;
     half NdotRim = 1-saturate(dot(normalize(viewDirectionWS),normalWS));
-    half rimToon = smoothstep(luma,luma+(_BlendSmoothness*.5),NdotRim);
+    // half rimToon = smoothstep(luma,luma+(_BlendSmoothness*.5),NdotRim);
+    half rimToon = smoothstep(_RimWidth,_RimWidth+(_BlendSmoothness*.5),NdotRim);
 
     return (DirectBDRF(brdfData, normalWS, lightDirectionWS, viewDirectionWS, monoRadiance) * radianceToon) * (1+(rimToon*_RimStrength));
 }

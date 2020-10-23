@@ -52,7 +52,7 @@ Material:
     - _AlphaClip: 0
     - _AmbientStrength: 0.1
     - _Blend: 0
-    - _BlendSmoothness: 0.01
+    - _BlendSmoothness: 0.028
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5

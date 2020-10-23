@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wood 3
-  m_Shader: {fileID: 4800000, guid: fc4dd905980188747b0edaf41bcb389f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2bf294faeb9010a46a783f7544ee2d61, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -63,9 +63,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
-    - _AmbientStrength: 0.359
+    - _AmbientStrength: 0.29
     - _Blend: 0
-    - _BlendSmoothness: 0.591
+    - _BlendSmoothness: 0.029
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -78,11 +78,12 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimStrength: 0.13
-    - _RimWidth: 0.607
+    - _RimStrength: 0.19
+    - _RimWidth: 0.206
     - _Smoothness: 0.339
     - _SmoothnessTextureChannel: 0
-    - _SpecStrength: 0.8
+    - _SpecSize: 0.738
+    - _SpecStrength: 2.2
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0

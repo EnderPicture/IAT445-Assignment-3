@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wood 4
-  m_Shader: {fileID: 4800000, guid: fc4dd905980188747b0edaf41bcb389f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2bf294faeb9010a46a783f7544ee2d61, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -63,7 +63,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaClip: 0
-    - _AmbientStrength: 0.415
+    - _AmbientStrength: 0.272
     - _Blend: 0
     - _BlendSmoothness: 0.01
     - _BumpScale: 1
@@ -82,6 +82,7 @@ Material:
     - _RimWidth: 0.607
     - _Smoothness: 0.339
     - _SmoothnessTextureChannel: 0
+    - _SpecSize: 0.9
     - _SpecStrength: 0.8
     - _SpecularHighlights: 1
     - _SrcBlend: 1

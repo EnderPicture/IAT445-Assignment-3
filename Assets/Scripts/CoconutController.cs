@@ -7,11 +7,11 @@ public class CoconutController : MonoBehaviour
     public float landHeight;
     public float waterDrag;
     public float buoyancy;
-    Rigidbody rigidbody;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -20,12 +20,12 @@ public class CoconutController : MonoBehaviour
 
         if (transform.position.y < landHeight)
         {
-            rigidbody.AddForce(new Vector3(0,buoyancy,0));
-            rigidbody.drag = waterDrag;
+            rb.AddForce(new Vector3(0,buoyancy,0));
+            rb.drag = waterDrag;
         }
         else 
         {
-            rigidbody.drag = 0;
+            rb.drag = 0;
         }
     }
 }

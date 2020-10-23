@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public Text shellNumText;
     public Transform shellContainer;
+    public GameObject dingSound;
     int numOfShellsTotal = 0;
     int numOfShells = 0;
 
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(hit.transform.gameObject);
                 numOfShells++;
                 shellNumText.text = numOfShells + "/" + numOfShellsTotal;
+                Instantiate(dingSound);
             }
         }
 

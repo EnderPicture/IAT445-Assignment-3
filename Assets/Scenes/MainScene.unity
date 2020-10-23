@@ -603,7 +603,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17558
+  m_Name: pb_Mesh17620
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32209,6 +32209,7 @@ MonoBehaviour:
   Music: {fileID: 8067404415101125692, guid: a5740d600063696498b8da1a36435ed5, type: 3}
   shellNumText: {fileID: 1256574353}
   shellContainer: {fileID: 73609787}
+  dingSound: {fileID: 7331854951436748106, guid: 9b9dea9a934d8954a82c6ee977b621f2, type: 3}
 --- !u!4 &685283772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
@@ -33988,8 +33989,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 143.73999, y: 39.92}
-  m_SizeDelta: {x: 229.2269, y: 83.47308}
+  m_AnchoredPosition: {x: 152.16995, y: 39.92}
+  m_SizeDelta: {x: 244.79471, y: 83.47308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433004467
 MonoBehaviour:
@@ -34519,8 +34520,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 143.73999, y: 92.12001}
-  m_SizeDelta: {x: 229.2269, y: 83.47308}
+  m_AnchoredPosition: {x: 152.16995, y: 92.12001}
+  m_SizeDelta: {x: 244.79471, y: 83.47308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575507360
 MonoBehaviour:

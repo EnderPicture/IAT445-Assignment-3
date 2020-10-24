@@ -2,16 +2,22 @@
 
 ## Resources from
 [IronWarrior/ToonWaterShader](https://github.com/IronWarrior/ToonWaterShader)
+- Used with modifications to HLSL
 
 [Unity Toon Shader Tutorial at Roystan](https://roystan.net/articles/toon-shader.html)
+- Rewritten for URP lit shader + modifed shader GUI
 
 [Perlin Noise](https://forum.unity.com/threads/2d-3d-4d-optimised-perlin-noise-cg-hlsl-library-cginc.218372/)
+- Used directly for water noise
 
 [Sand Texture](https://media.istockphoto.com/vectors/top-view-seamless-vector-sea-sand-vector-id590596406?k=6&m=590596406&s=612x612&w=0&h=7XHVA7WXADb3w0o0cdJgDLzsC0OBBceoMdYgvCbW_Fo=)
+- Modified to be less contrasty and monochrome + modified to be normal map
 
 [HDRI: Table Mountain 2 | HDRI Haven](https://hdrihaven.com/hdri/?c=skies&h=table_mountain_2)
+- Modified to be cell shaded
 
 [Paper Texture](https://images.freecreatives.com/wp-content/uploads/2015/04/natural-paper-background-texture-hd-5a0b.jpg)
+- Modified to be less contrasty and + modified to be normal map
 
 [Crosshair](https://giganticubegames.files.wordpress.com/2012/11/crosshairsg.png)
 
